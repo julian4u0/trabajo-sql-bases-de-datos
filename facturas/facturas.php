@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--titrulo de la pagina-->
-    <title>inicio</title>
+    <title>Facturas</title>
     <!--CDN de boostraps: Libreria de estilos SCSS y CSS para darle unas buena apariencia a la aplicacion
     para mas informacion buscar documentacion de boostraps en: https://getbootstrap.com/docs/4.3/getting-started/introduction/ -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <!--CDN de forntawesome: Libreria de estilos SCSS y CSS incluir icononos y formas 
      para mas informacio : https://fontawesome.com/start-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
@@ -23,21 +23,7 @@
 
 <body>
     <!--Barra de navegacion-->
-    <ul class="nav">
-        <li class="nav nav-item">
-            <a class="nav-link " href="../index.html">inicio</a>
-        </li>
-        <li class="nav ">
-            <a class="nav-link " href="../personas/personas.php">Personas</a>
-        </li>
-        <li class="nav-item nav-pills">
-            <a class="nav-link active" href="facturas.php">Facturas</a>
-        </li>
-        <li class="nav ">
-            <a class="nav-link " href="../busquedas/busquedas.php">Busquedas</a>
-        </li>
-
-    </ul>
+    <?php include("../elementos/cabezera.php"); ?>
 
     <div class="container mt-3">
         <div class="row">
