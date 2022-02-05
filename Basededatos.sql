@@ -1,90 +1,84 @@
+
+--
 CREATE TABLE
-    persona(
-        cedula INT(3) UNSIGNED NOT NULL PRIMARY KEY,
-        nombre VARCHAR(40) NOT NULL,
-        direccion VARCHAR(40),
-        telefono VARCHAR(40)
+    vagon(
+        numero_serie INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+        capacidad INT(2) NOT NULL,
+        funcion VARCHAR(10) NOT NULL
     ) ENGINE = InnoDB;
 
 CREATE TABLE
-    empresa(
-        nit INT(3) UNSIGNED NOT NULL PRIMARY KEY,
-        nombre VARCHAR(40) NOT NULL,
-        direccion VARCHAR(40) NOT NULL,
-        pagina_web VARCHAR(40)
+    tren(
+        id INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+        combustible VARCHAR(10) NOT NULL,
+        capacidad INT(3) NOT NULL,
+        tipo VARCHAR(1) NOT NULL -- Segun profesor arco generico no lleva CF
     ) ENGINE = InnoDB;
 
 CREATE TABLE
-    factura(
-        codigo INT NOT NULL PRIMARY KEY,
-        fecha DATE NOT NULL,
-        valor VARCHAR(40),
-        fecha_retorno DATE,
-        tipo VARCHAR(1),
-        cedula_p INT(3) UNSIGNED,
-        FOREIGN KEY fk_p(cedula_p) REFERENCES persona(cedula)
+    posicionvagon(
+        posicion INT(2) NOT NULL,
+        FOREIGN KEY fk_p(numero_serie) REFERENCES vagon(numero_serie)
         ON DELETE CASCADE,
-        nit_E INT(3) UNSIGNED,
-        FOREIGN KEY fk_e(nit_e) REFERENCES empresa(nit)
+        FOREIGN KEY fk_p(id) REFERENCES tren(id)
         ON DELETE CASCADE
     ) ENGINE = InnoDB;
 
-INSERT INTO
-    `empresa`(`nit`, `nombre`, `direccion`, `pagina_web`)
-VALUES (1, 'postobon', 'CR-1 Cl-2 ', 'www.postobon.com');
+CREATE TABLE
+    ciudad(
+        nombre INT(6) UNSIGNED NOT NULL PRIMARY KEY, --{“Django”, “Kepler”, “Orion”}
+        distancia INT(4) NOT NULL,
+        altura INT(4) NOT NULL,
+        temperatura_promedio INT(2) NOT NULL
+    ) ENGINE = InnoDB;
 
-INSERT INTO
-    `empresa`(`nit`, `nombre`, `direccion`, `pagina_web`)
-VALUES (2, 'cocacola', 'CR-2 cl-3', 'www.cocacola.com');
+CREATE TABLE
+    ciudadxtren(
+        precio INT(2) NOT NULL,
+        FOREIGN KEY fk_p(nombre) REFERENCES ciudad(nombre)
+        ON DELETE CASCADE,
+        FOREIGN KEY fk_p(id) REFERENCES tren(id)
+        ON DELETE CASCADE
+    ) ENGINE = InnoDB;
 
-INSERT INTO
-    `persona`(`cedula`, `nombre`, `DIRECCION`, `telefono`)
-VALUES (1, 'Jota Mario Valencia', 'Cielo', '302456789');
+CREATE TABLE
+    empleado(
+        documento INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+        nombre VARCHAR(100) NOT NULL,
+        sueldo INT(4) NOT NULL,
+        telefono VARCHAR(13),
+        rol VARCHAR(1) --{“M”,”C”,”D”,”A”}
+    ) ENGINE = InnoDB;
 
-INSERT INTO
-    `persona`(`cedula`, `nombre`, `DIRECCION`, `telefono`)
-VALUES (2, 'Marbelle Ramirez', 'Buenaventura', '302356789');
+CREATE TABLE
+    empleadoexterno(
+        precio INT(10) PRIMARY KEY NOT NULL,
+        nombre VARCHAR(100) NOT NULL
+    ) ENGINE = InnoDB;
 
-INSERT INTO
-    `factura`(
-        `codigo`,
-        `fecha`,
-        `valor`,
-        `fecha_retorno`,
-        `tipo`,
-        `cedula_p`
-    )
-VALUES (
-        1,
-        DATE('2010-01-01'),
-        500,
-        DATE('2010-02-01'),
-        'P',
-        1
-    );
 
-INSERT INTO
-    `factura`(
-        `codigo`,
-        `fecha`,
-        `valor`,
-        `fecha_retorno`,
-        `tipo`,
-        `cedula_p`
-    )
-VALUES (
-        2,
-        DATE('2012-05-01'),
-        500,
-        DATE('2016-02-01'),
-        'P',
-        2
-    );
 
-INSERT INTO
-    `factura`(`codigo`, `fecha`, `valor`, `tipo`, `nit_e`)
-VALUES (3, DATE('2010-01-01'), 50000, 'C', 1);
+CREATE TABLE
+    viaje(
+        codigo INT(10) NOT NULL PRIMARY KEY,
+        fecha DATE NOT NULL, --formato: YYYY-MM-DD
+        hora TIME NOT NULL, --formato: hh:mm:ss
+        maletas INT(1) NOT NULL,
+        estado VARCHAR(10) NOT NULL, -- {“esperando”, “encurso”,”saliendo”,”terminado”}
+        FOREIGN KEY fk_p(nombre) REFERENCES ciudad(nombre)
+        ON DELETE CASCADE,
+        FOREIGN KEY fk_p(id) REFERENCES tren(id)
+        ON DELETE CASCADE
+    ) ENGINE = InnoDB;
 
-INSERT INTO
-    `factura`(`codigo`, `fecha`, `valor`, `tipo`, `nit_e`)
-VALUES (4, DATE('2012-05-01'), 50000, 'C', 2);
+
+-- Para que exista un 
+-- Para que haya un turno debe de haber un viaje y un empleado? 
+CREATE TABLE
+    turno(
+        codigo INT(10) PRIMARY KEY NOT NULL,
+        FOREIGN KEY fk_p(d_empleado) REFERENCES empleado(documento)
+        ON DELETE CASCADE,
+        FOREIGN KEY fk_p(c_viaje) REFERENCES viaje(documento)
+        ON DELETE CASCADE,
+    ) ENGINE = InnoDB;
