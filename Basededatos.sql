@@ -1,5 +1,5 @@
 
---
+--no he terminado
 CREATE TABLE
     vagon(
         numero_serie INT(10) UNSIGNED PRIMARY KEY NOT NULL,
