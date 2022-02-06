@@ -2,14 +2,14 @@
 --no he terminado
 CREATE TABLE
     vagon(
-        numero_serie INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+        numero_serie INT(10) UNSIGNED PRIMARY KEY ,
         capacidad INT(2) NOT NULL,
         funcion VARCHAR(10) NOT NULL
     ) ENGINE = InnoDB;
 
 CREATE TABLE
     tren(
-        id INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+        id INT(10) UNSIGNED PRIMARY KEY ,
         combustible VARCHAR(10) NOT NULL,
         capacidad INT(3) NOT NULL,
         tipo VARCHAR(1) NOT NULL -- Segun profesor arco generico no lleva CF
@@ -26,7 +26,7 @@ CREATE TABLE
 
 CREATE TABLE
     ciudad(
-        nombre INT(6) UNSIGNED NOT NULL PRIMARY KEY, --{“Django”, “Kepler”, “Orion”}
+        nombre INT(6) UNSIGNED NOT NULL , --{“Django”, “Kepler”, “Orion”}
         distancia INT(4) NOT NULL,
         altura INT(4) NOT NULL,
         temperatura_promedio INT(2) NOT NULL
@@ -43,7 +43,7 @@ CREATE TABLE
 
 CREATE TABLE
     empleado(
-        documento INT(10) UNSIGNED PRIMARY KEY NOT NULL,
+        documento INT(10) UNSIGNED PRIMARY KEY ,
         nombre VARCHAR(100) NOT NULL,
         sueldo INT(4) NOT NULL,
         telefono VARCHAR(13),
@@ -52,7 +52,7 @@ CREATE TABLE
 
 CREATE TABLE
     empleadoexterno(
-        precio INT(10) PRIMARY KEY NOT NULL,
+        precio INT(10) PRIMARY KEY ,
         nombre VARCHAR(100) NOT NULL
     ) ENGINE = InnoDB;
 
@@ -60,7 +60,7 @@ CREATE TABLE
 
 CREATE TABLE
     viaje(
-        codigo INT(10) NOT NULL PRIMARY KEY,
+        codigo INT(10)  PRIMARY KEY,
         fecha DATE NOT NULL, --formato: YYYY-MM-DD
         hora TIME NOT NULL, --formato: hh:mm:ss
         maletas INT(1) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE
 -- Para que haya un turno debe de haber un viaje y un empleado? 
 CREATE TABLE
     turno(
-        codigo INT(10) PRIMARY KEY NOT NULL,
+        codigo INT(10) PRIMARY KEY ,
         FOREIGN KEY fk_p(d_empleado) REFERENCES empleado(documento)
         ON DELETE CASCADE,
         FOREIGN KEY fk_p(c_viaje) REFERENCES viaje(documento)
