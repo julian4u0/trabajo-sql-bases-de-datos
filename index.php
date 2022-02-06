@@ -10,7 +10,7 @@
 <body>
     
 <script>
-    window.location = "http://localhost:81/trabajo-sql-bases-de-datos/personas/personas.php"
+    window.location = "http://localhost/trabajo-sql-bases-de-datos/personas/personas.php"
 </script>
 </body>
 </html>
