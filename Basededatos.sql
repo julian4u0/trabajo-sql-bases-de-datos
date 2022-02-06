@@ -1,9 +1,12 @@
+DROP TABLE vagon,tren,posicionvagon,ciudad,ciudadxtren,empleado,empleadoexterno;
+DROP TABLE viaje,turno,usuario,tiquete;
+
 CREATE TABLE
     vagon(
         numero_serie BIGINT PRIMARY KEY ,
         capacidad TINYINT NOT NULL,
         funcion VARCHAR(10) NOT NULL
-    );
+    ) ENGINE = InnoDB;
 
 CREATE TABLE
     tren(
@@ -11,33 +14,35 @@ CREATE TABLE
         combustible VARCHAR(10) NOT NULL,
         capacidad SMALLINT NOT NULL,
         tipo VARCHAR(1) NOT NULL
-    );
+    ) ENGINE = InnoDB;
 
 CREATE TABLE
     posicionvagon(
         posicion TINYINT NOT NULL,
-        numero_serie BIGINT FOREIGN KEY REFERENCES vagon(numero_serie)
+        vagon BIGINT REFERENCES vagon(numero_serie)
         ON DELETE CASCADE,
-        id BIGINT FOREIGN KEY REFERENCES tren(id)
-        ON DELETE CASCADE
-    );
+        tren BIGINT REFERENCES tren(id)
+        ON DELETE CASCADE,
+        PRIMARY KEY (vagon,tren)
+    ) ENGINE = InnoDB;
 
 CREATE TABLE
     ciudad(
-        nombre VARCHAR(7) PRIMARY KEY, --{“Django”, “Kepler”, “Orion”}
+        nombre VARCHAR(7) PRIMARY KEY, -- {“Django”, “Kepler”, “Orion”}
         distancia SMALLINT NOT NULL,
         altura SMALLINT NOT NULL,
         temperatura_promedio TINYINT NOT NULL
-    );
+    ) ENGINE = InnoDB;
 
 CREATE TABLE
     ciudadxtren(
         precio TINYINT NOT NULL,
-        id BIGINT FOREIGN KEY REFERENCES tren(id)
+        tren BIGINT REFERENCES tren(id)
         ON DELETE CASCADE,
-        nombre VARCHAR(7) FOREIGN KEY REFERENCES ciudad(nombre)
-        ON DELETE CASCADE
-    );
+        ciudad VARCHAR(7) REFERENCES ciudad(nombre)
+        ON DELETE CASCADE,
+        PRIMARY KEY (tren,ciudad)
+    ) ENGINE = InnoDB;
 
 CREATE TABLE
     empleado(
@@ -45,59 +50,66 @@ CREATE TABLE
         nombre VARCHAR(100) NOT NULL,
         sueldo SMALLINT NOT NULL,
         telefono VARCHAR(13),
-        rol VARCHAR(1) --{“M”,”C”,”D”,”A”}
-    );
+        rol VARCHAR(1) -- {“M”,”C”,”D”,”A”}
+    ) ENGINE = InnoDB;
 
 CREATE TABLE
     empleadoexterno(
-        precio BIGINT PRIMARY KEY ,
+        identifiacion BIGINT PRIMARY KEY ,
         nombre VARCHAR(100) NOT NULL
-    );
+    ) ENGINE = InnoDB;
 
 
 
 CREATE TABLE
     viaje(
         codigo BIGINT PRIMARY KEY,
-        fecha DATE NOT NULL, --formato: YYYY-MM-DD
-        hora TIME NOT NULL, --formato: hh:mm:ss
+        fecha DATE NOT NULL, -- formato: YYYY-MM-DD
+        hora TIME NOT NULL, -- formato: hh:mm:ss
         maletas TINYINT NOT NULL,
         estado VARCHAR(10) NOT NULL, -- {“esperando”, “encurso”,”saliendo”,”terminado”}
-        nombre VARCHAR(7) FOREIGN KEY REFERENCES ciudad(nombre)
+        ciudad VARCHAR(7) REFERENCES ciudad(nombre)
         ON DELETE CASCADE,
-        id BIGINT FOREIGN KEY REFERENCES tren(id)
+        tren BIGINT REFERENCES tren(id)
         ON DELETE CASCADE
-    );
+    ) ENGINE = InnoDB;
 
 CREATE TABLE
     turno(
-        identificador BIGINT PRIMARY KEY ,
-        documento BIGINT FOREIGN KEY REFERENCES empleado(documento)
+        codigo BIGINT PRIMARY KEY ,
+        viaje BIGINT REFERENCES viaje(codigo)
         ON DELETE CASCADE,
-        codigo BIGINT FOREIGN KEY REFERENCES viaje(codigo)
-        ON DELETE CASCADE
-    );
+        empleado BIGINT REFERENCES empleado(documento)
+        ON DELETE CASCADE,
+        empleadoexterno BIGINT REFERENCES empleadoexterno(identifiacion)
+        ON DELETE CASCADE,
+
+        CHECK((empleado IS NULL AND empleadoexterno IS NOT NULL)
+        OR 
+        (empleadoexterno IS NULL AND empleado IS NOT NULL))
+
+    ) ENGINE = InnoDB;
+
 CREATE TABLE
     usuario(
-        documento BIGINT PRIMARY KEY,
+        cedula BIGINT PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
-        fecha_nacimiento DATE NOT NULL,
+        fecha_nacimiento DATE NOT NULL, -- formato: YYYY-MM-DD
         email VARCHAR(50) NOT NULL,
-        telefono VARCHAR(13),
+        telefono VARCHAR(13)
 
-        
-    );
+    ) ENGINE = InnoDB;
 
 CREATE TABLE
     tiquete(
-        identificador BIGINT PRIMARY KEY NOT NULL,
-        fecha_creacion DATE NOT NULL, --puede ser null
+        codigo BIGINT PRIMARY KEY,
+        fecha_creacion DATE NOT NULL, -- puede ser null
         puntos INT NOT NULL, 
-        fecha_compra DATE, --puede ser null
+        fecha_compra DATE, -- puede ser null
         vencimiento_reserva DATE,
 
-        documento BIGINT FOREIGN KEY REFERENCES usuario(documento)
+        usuario BIGINT REFERENCES usuario(documento)
         ON DELETE CASCADE,
-        codigo BIGINT FOREIGN KEY REFERENCES viaje(codigo)
+        viaje BIGINT REFERENCES viaje(codigo)
         ON DELETE CASCADE
-    );
+    ) ENGINE = InnoDB;
