@@ -86,7 +86,7 @@ CREATE TABLE
 
 CREATE TABLE
     empleadoexterno(
-        identificacion BIGINT PRIMARY KEY(
+        identificacion BIGINT PRIMARY KEY CHECK(
             codigo >= 0 AND
             codigo <= 9999999999
         ),
@@ -95,7 +95,7 @@ CREATE TABLE
 
 CREATE TABLE
     viaje(
-        codigo BIGINT PRIMARY KEY (
+        codigo BIGINT PRIMARY KEY CHECK(
             codigo >= 0 AND
             codigo <= 9999999999
         ),
