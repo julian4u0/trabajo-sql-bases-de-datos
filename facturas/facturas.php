@@ -49,8 +49,8 @@
                             </div>
                             
                             <div  name="taskOption" class="form-group">
-                                <label for="exampleFormControlSelect2">Tipo</label>
-                                <select class="form-control" onchange="cambioTipo(this)" name="tipo" id="exampleFormControlSelect2">
+                                <label for="exampleFormControlSelect1">Tipo</label>
+                                <select class="form-control" onchange="cambioTipo(this)" name="tipo" id="exampleFormControlSelect1">
                                 <option value="P"> Prestamo</option>
                                 <option value="C">Compra</option>
                                 
@@ -120,7 +120,6 @@
                                     $("#identificacion").val('');
                                 }
                             </script>
-                          
                            
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Insertar">
