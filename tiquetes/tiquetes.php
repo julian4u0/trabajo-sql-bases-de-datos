@@ -93,7 +93,7 @@
                             </script>
                             <div  name="taskOption" class="form-group">
                                 <label for="exampleFormControlSelect">¿Se efectuará una reserva o una compra?</label>
-                                <select class="form-control" onchange="cambioTipo(this)" name="tipo" id="exampleFormControlSelect">
+                                <select class="form-control" onclick="cambioTipo(this)" name="tipo" id="exampleFormControlSelect">
                                 <option value="R">Reservación</option>
                                 <option value="C">Compra</option>
                                 
@@ -182,6 +182,13 @@
                 </div>
             </div>
         </div>
+
+        
+    </div>
+
+
+
+
 </body>
 
 </html>
