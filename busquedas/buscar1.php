@@ -22,9 +22,10 @@
         <table class="table border-rounded">
             <thead class="thead ">
                 <tr>
-                    <th scope="col">Posición</th>
+                    <th scope="col">Pocisión</th>
                     <th scope="col">Cédula</th>
-                    <th scope="col">Nombre</th>  
+                    <th scope="col">Nombre</th> 
+                    <th scope="col">SumaPuntos</th>   
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +37,8 @@
                         $inicio = $posi - 1;
                         $query="SELECT cedula,nombre,SUM(puntos) AS sumapuntos  
                         FROM tiquete JOIN usuario WHERE tiquete.usuario = usuario.cedula
-                        GROUP BY cedula LIMIT $inicio,$posi";
+                        GROUP BY cedula ORDER BY sumapuntos  DESC
+                        LIMIT $inicio,1";
                     }
                     else{
                     }                    
@@ -45,6 +47,7 @@
                         foreach($result as $fila){
                         ?>
                             <tr>
+                                <td><?=$posi;?></td>
                                 <td><?=$fila['cedula'];?></td>
                                 <td><?=$fila['nombre'];?></td>
                                 <td><?=$fila['sumapuntos'];?></td>
