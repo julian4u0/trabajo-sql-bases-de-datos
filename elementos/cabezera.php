@@ -19,6 +19,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../usuarios/usuarios.php">Usuarios</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../tiquetes/tiquetes.php">Tiquetes</a>
+                </li>
             </ul>
         </div>
     </div>

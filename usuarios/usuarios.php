@@ -37,7 +37,7 @@
                     </div>
                     <div class="card-body">
                         <!--formulario para insertar una persona mediante el metodo post-->
-                        <form action="update_p.php" class="form-group" method="post">
+                        <form action="update_u.php" class="form-group" method="post">
                             <div class="form-group">
                                 <label for="cedula">Cédula</label>
                                 <input type="text" readonly name="cedula" value=<?=$_GET["cedula"];?> id="cedula"
@@ -82,7 +82,7 @@
                     </div>
                     <div class="card-body">
                         <!--formulario para insertar una persona mediante el metodo post-->
-                        <form action="insert_p.php" class="form-group" method="post">
+                        <form action="insert_u.php" class="form-group" method="post">
                             <div class="form-group">
                                 <label for="cedula">Cédula</label>
                                 <input type="text" name="cedula" id="cedula" class="form-control">
@@ -135,7 +135,7 @@
                     </thead>
                     <tbody>
                         <?php 
-                        require('select_p.php');
+                        require('select_u.php');
                         if($result){
                             foreach ($result as $fila){
                         ?>
@@ -147,7 +147,7 @@
                             <td><?=$fila['telefono'];?></td>
                             <td>
 
-                                <form action="delete_p.php" method="POST">
+                                <form action="delete_u.php" method="POST">
                                     <input type="text" value=<?=$fila['cedula'];?> hidden>
                                     <input type="text" name="d" value=<?=$fila['cedula'];?> hidden>
                                     <button class="btn btn-danger" title="eliminar" type="submit"><i
