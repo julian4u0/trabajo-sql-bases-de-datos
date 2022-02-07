@@ -87,8 +87,8 @@ CREATE TABLE
 CREATE TABLE
     empleadoexterno(
         identificacion BIGINT PRIMARY KEY CHECK(
-            codigo >= 0 AND
-            codigo <= 9999999999
+            identificacion >= 0 AND
+            identificacion <= 9999999999
         ),
         nombre VARCHAR(100) NOT NULL
     );
@@ -172,4 +172,3 @@ CREATE TABLE
         ON DELETE CASCADE
     );
 
-INSERT INTO
