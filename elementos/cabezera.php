@@ -14,13 +14,19 @@
                     <a class="nav-link" href="../facturas/facturas.php">Facturas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../busquedas/busquedas.php">Busquedas</a>
+                    <a class="nav-link" href="../busquedas/busquedas1.php">Busquedas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../usuarios/usuarios.php">Usuarios</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../tiquetes/tiquetes.php">Tiquetes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../consultas/consultas.php">Consultas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../busquedas/busquedas.php">Búsquedas</a>
                 </li>
             </ul>
         </div>
