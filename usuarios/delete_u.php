@@ -13,7 +13,7 @@ if($result){
     
      
  }else{
-     echo "Ha ocurrido un error al Eliminar  la persona";
+     echo "Ha ocurrido un error al Eliminar  el usuario";
  }
  
 mysqli_close($conn);
