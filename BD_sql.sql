@@ -86,13 +86,16 @@ CREATE TABLE
 
 CREATE TABLE
     empleadoexterno(
-        identifiacion BIGINT PRIMARY KEY,
+        identificacion BIGINT PRIMARY KEY CHECK(
+            identificacion >= 0 AND
+            identificacion <= 9999999999
+        ),
         nombre VARCHAR(100) NOT NULL
     );
 
 CREATE TABLE
     viaje(
-        codigo BIGINT PRIMARY KEY (
+        codigo BIGINT PRIMARY KEY CHECK(
             codigo >= 0 AND
             codigo <= 9999999999
         ),
@@ -168,3 +171,4 @@ CREATE TABLE
         viaje BIGINT REFERENCES viaje(codigo)
         ON DELETE CASCADE
     );
+
