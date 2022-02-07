@@ -1,3 +1,10 @@
+-- Borrado de Tablas
+DROP TABLE vagon,tren,posicionvagon,ciudad,ciudadxtren;
+DROP TABLE empleado,conductor,mecanico,cocinero,empleadoexterno;
+DROP TABLE viaje,turno,usuario,tiquete
+
+
+-- Creación de Tablas
 CREATE TABLE
     vagon(
         numero_serie BIGINT PRIMARY KEY ,
@@ -157,7 +164,7 @@ CREATE TABLE
     ) ENGINE = InnoDB;
 
 
-
+-- Registros
 -- vagones
 INSERT INTO vagon VALUES(99999999, 75, "pasajeros");
 INSERT INTO vagon VALUES(88888888, 70, "pasajeros");
