@@ -35,6 +35,7 @@ CREATE TABLE
 CREATE TABLE
     ciudad(
         nombre VARCHAR(7) PRIMARY KEY, -- {“Django”, “Kepler”, “Orion”}
+        CONSTRAINT nombrec CHECK(nombre='Django' OR nombre='Kepler' OR nombre='Orion'),
         distancia SMALLINT NOT NULL,
         altura SMALLINT NOT NULL,
         temperatura_promedio TINYINT NOT NULL
@@ -58,7 +59,8 @@ CREATE TABLE
         nombre VARCHAR(100) NOT NULL,
         sueldo SMALLINT NOT NULL,
         telefono VARCHAR(13),
-        rol VARCHAR(1) -- {“M”,”C”,”D”,”A”}
+        rol VARCHAR(1), -- {“M”,”C”,”D”,”A”}
+        CONSTRAINT rolc CHECK(rol='M' OR rol='C' OR rol='D' OR rol='A' OR   rol IS NULL)
     ) ENGINE = InnoDB;
 
 CREATE TABLE
@@ -104,6 +106,7 @@ CREATE TABLE
         hora TIME NOT NULL, -- formato: hh:mm:ss
         maletas TINYINT NOT NULL,
         estado VARCHAR(10) NOT NULL, -- {“esperando”, “encurso”,”saliendo”,”terminado”}
+        CONSTRAINT estadoc CHECK(estado='esperando' OR estado='encurso' OR estado='saliendo' OR estado='terminado'),
         ciudad VARCHAR(7),
         FOREIGN KEY(ciudad) REFERENCES ciudad(nombre)
         ON DELETE CASCADE,
