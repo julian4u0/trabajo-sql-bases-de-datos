@@ -1,7 +1,11 @@
 -- Borrado de Tablas
-DROP TABLE vagon,tren,posicionvagon,ciudad,ciudadxtren;
-DROP TABLE empleado,conductor,mecanico,cocinero,empleadoexterno;
-DROP TABLE viaje,turno,usuario,tiquete
+DROP TABLE ciudadxtren;
+DROP TABLE cocinero,mecanico;
+DROP TABLE turno;
+DROP TABLE posicionvagon,vagon;
+DROP TABLE tiquete,usuario,viaje,ciudad;
+DROP TABLE conductor,empleadoexterno,empleado;
+DROP TABLE tren;
 
 
 -- Creación de Tablas
