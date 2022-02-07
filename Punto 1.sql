@@ -128,7 +128,7 @@ CREATE TABLE
         ON DELETE CASCADE,
         conductor NUMBER(10) REFERENCES conductor(documento)
         ON DELETE CASCADE,
-        conductor_externo NUMBER(10) REFERENCES empleadoexterno(identifiacion)
+        conductor_externo NUMBER(10) REFERENCES empleadoexterno(identificacion)
         ON DELETE CASCADE,
         CHECK( (
                 conductor IS NULL AND
@@ -149,7 +149,7 @@ CREATE TABLE
         ON DELETE CASCADE,
         empleado NUMBER(10) REFERENCES empleado(documento)
         ON DELETE CASCADE,
-        empleadoexterno NUMBER(10) REFERENCES empleadoexterno(identifiacion)
+        empleadoexterno NUMBER(10) REFERENCES empleadoexterno(identificacion)
         ON DELETE CASCADE,
     );
 
