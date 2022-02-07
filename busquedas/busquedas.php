@@ -28,31 +28,71 @@
     <div class="container">
         <div class="row my-2">
             <div class="col-6">
-                <p>Para realizar una busqueda de facturas primero selecciona y llena los parametros de la busqueda.</p>
-                <form action="buscar.php" target="_blank"  method="POST">
-                    <div class="form-group">
-                        <label for="">Parametros:</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                value="comprador" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                                Identificacion del Comprador
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                                value="factura">
-                            <label class="form-check-label" for="exampleRadios2">
-                                Codigo de la Factura
-                            </label>
-                        </div>
+                <p>Para realizar una busqueda de tiquetes primero selecciona la opción y luego y llena los parametros de la busqueda.</p>
+                <form action="buscar1.php" target="_blank"  method="POST">
+                    <div class="form-check">
+                        <input class="form-check-input" onclick="posicion(this);" type="radio" name="exampleRadios" id="exampleRadios1"
+                            value="p">
+                        <label class="form-check-label" for="exampleRadios1">
+                            Posición respecto a los puntos totales
+                        </label>
                     </div>
-                    <div class="input-group ">
-                        <input type="text" name="identificacion" id="identificacion" class="form-control">
-                        <button class="btn  btn-primary"  title="Buscar" type="submit">
+                    <div id="selectPosicion" class="input-group ">
+                        <input type="number" name="pos" id="pos" class="form-control">
+                        <button class="btn  btn-primary"  title="Buscar1" type="submit">
                             <i class="fas fa-search-plus mx-0 my-0"> </i></button>
                     </div>
+                    <!--librerias para usar jquery-->
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+                    <!--controlador de los tipo radio-->
+                    <script>
+                        $("#selectPosicion").hide();
+                        function posicion(myRadio) {
+
+                                        
+                            if(myRadio.value==="p"){
+                                       
+                                $("#selectPosicion").show();
+                            }
+                            $("#pos").val('');
+                        }
+                    </script>
                 </form>
+
+                <form action="buscar2.php" target="_blank"  method="POST">
+                    <div class="form-check">
+                        <input class="form-check-input" onclick="fechas(this);" type="radio" name="exampleRadios" id="exampleRadios1"
+                            value="f">
+                        <label class="form-check-label" for="exampleRadios1">
+                            Usuarios que no tienen tiquetes registrados entre las fechas
+                        </label>
+                    </div>
+                    <div id="selectFechas" class="input-group ">
+                        <input type="date" name="f1" id="f1" class="form-control">
+                        <input type="date" name="f2" id="f2" class="form-control">
+                        <button class="btn  btn-primary"  title="Buscar2" type="submit">
+                            <i class="fas fa-search-plus mx-0 my-0"> </i></button>
+                    </div>
+                    <!--librerias para usar jquery-->
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+                    <!--controlador de los tipo radio-->
+                    <script>
+                        $("#selectFechas").hide();
+                        function fechas(myRadio) {
+
+                                        
+                            if(myRadio.value==="f"){
+                                       
+                                $("#selectFechas").show();
+                            }
+                            $("#pos").val('');
+                        }
+                    </script>
+                </form>
+
+
             </div>
             
         </div>
