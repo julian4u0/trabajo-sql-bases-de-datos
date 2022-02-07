@@ -35,7 +35,7 @@
                 require('../configuraciones/conexion.php');
                 $query ="SELECT cedula,nombre,SUM(puntos) AS sumapuntos  
                 FROM tiquete JOIN usuario WHERE tiquete.usuario = usuario.cedula
-                GROUP BY cedula LIMIT 2";
+                GROUP BY cedula ORDER BY sumapuntos DESC LIMIT 2";
 
                 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
                 if($result){
