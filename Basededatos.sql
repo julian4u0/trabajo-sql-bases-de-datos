@@ -108,8 +108,10 @@ CREATE TABLE
         fecha_compra DATE, -- puede ser null
         vencimiento_reserva DATE,
 
-        usuario BIGINT REFERENCES usuario(documento)
+        usuario BIGINT,
+        FOREIGN KEY(usuario) REFERENCES usuario(cedula)
         ON DELETE CASCADE,
-        viaje BIGINT REFERENCES viaje(codigo)
+        viaje BIGINT,
+        FOREIGN KEY(viaje) REFERENCES viaje(codigo)
         ON DELETE CASCADE
     ) ENGINE = InnoDB;
