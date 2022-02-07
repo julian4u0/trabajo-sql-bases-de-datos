@@ -72,6 +72,28 @@ CREATE TABLE
         telefono VARCHAR(13),
         rol VARCHAR(1) CHECK (rol IN ("M", "C", "D", "A"))
     );
+    CREATE TABLE
+    conductor (
+        documento NUMBER(10) REFERENCES empleado(documento)
+        ON DELETE CASCADE,
+        licencia NUMBER(10) NOT NULL CHECK (
+            licencia >= 0 
+        )
+    );
+CREATE TABLE
+    mecanico (
+        documento NUMBER(10) REFERENCES empleado(documento)
+        ON DELETE CASCADE,
+        tarjeta_profesional NUMBER(10) NOT NULL CHECK (
+            tarjeta_profesional >= 0 
+        )
+    );
+CREATE TABLE
+    cocinero (
+        documento NUMBER(10) REFERENCES empleado(documento)
+        ON DELETE CASCADE,
+        fecha_graduacion DATE NOT NULL
+    );
 
 CREATE TABLE
     empleadoexterno(
@@ -87,9 +109,9 @@ CREATE TABLE
             codigo >= 0
         ),
         fecha DATE NOT NULL,
-        -- formato: YYYY-MM-DD
+
         hora TIME NOT NULL,
-        -- formato: hh:mm:ss
+
         maletas NUMBER(2) NOT NULL CHECK(
             maletas >= 0 AND
             maletas < 10
@@ -103,7 +125,19 @@ CREATE TABLE
         tren NUMBER(10) REFERENCES tren(id)
         ON DELETE CASCADE,
         anterior NUMBER(10) REFERENCES viaje(codigo)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+        conductor NUMBER(10) REFERENCES conductor(documento)
+        ON DELETE CASCADE,
+        conductor_externo NUMBER(10) REFERENCES empleadoexterno(identifiacion)
+        ON DELETE CASCADE,
+        CHECK( (
+                conductor IS NULL AND
+                conductor_externo IS NOT NULL
+            ) OR (
+                conductor IS NOT NULL AND
+                conductor_externo IS NULL 
+            )
+        )
     );
 
 CREATE TABLE
@@ -117,14 +151,6 @@ CREATE TABLE
         ON DELETE CASCADE,
         empleadoexterno NUMBER(10) REFERENCES empleadoexterno(identifiacion)
         ON DELETE CASCADE,
-        CHECK( (
-                empleado IS NULL AND
-                empleadoexterno IS NOT NULL
-            ) OR (
-                empleadoexterno IS NULL AND
-                empleado IS NOT NULL
-            )
-        ) 
     );
 
 CREATE TABLE
